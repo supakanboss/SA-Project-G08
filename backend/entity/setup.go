@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"gorm.io/gorm"
-
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 )
 
@@ -17,6 +17,7 @@ func DB() *gorm.DB {
 }
 
 func SetupDatabase() {
+	///////////ทดลองให้เวลาเกิดเป็นเวลาปัจุบัน///////////
 	t := time.Now()
 
 	database, err := gorm.Open(sqlite.Open("sa-65.db"), &gorm.Config{})
@@ -28,7 +29,6 @@ func SetupDatabase() {
 	}
 
 	// Migrate the schema
-
 	database.AutoMigrate(
 		&MEMBER{},
 		&GENDER{},
@@ -459,45 +459,48 @@ func SetupDatabase() {
 	}
 	db.Model(&PROVINCE{}).Create(&province77)
 
-
+	///////////////ข้อมูลใน entity MEMBER///////////
+	password1, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
+	password2, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
+	password3, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
 	//คนที่1
 	db.Model(&MEMBER{}).Create(&MEMBER{
-		Member_NAME: "สุภานัน เรืองสุข",
+		Member_Name: "สุภานัน เรืองสุข",
 		Email:       "supanan@gmail.com",
-		Password:    "12348888",
+		Password:    string(password1),
 		Age:         20,
 		Height:      190,
 		Weight:      45,
 		Tel:         "0885870149",
-		Birthday:         t,
+		BirthDay:    t,
 		Gender:      genM,
 		Province:    province69,
 		Package:     package2,
 	})
 	//คนที่2
 	db.Model(&MEMBER{}).Create(&MEMBER{
-		Member_NAME: "วนัสนันท์ จันทร์มล",
+		Member_Name: "วนัสนันท์ จันทร์มล",
 		Email:       "B6306304@g.sut.ac.th",
-		Password:    "55555555",
+		Password:    string(password2),
 		Age:         21,
 		Height:      170,
 		Weight:      48,
 		Tel:         "0803299545",
-		Birthday:         t,
+		BirthDay:    t,
 		Gender:      genF,
 		Province:    province14,
 		Package:     package1,
 	})
 	//คนที่3
 	db.Model(&MEMBER{}).Create(&MEMBER{
-		Member_NAME: "ศุภกานต์ แสงจันทร์",
+		Member_Name: "ศุภกานต์ แสงจันทร์",
 		Email:       "B6311391@g.sut.ac.th",
-		Password:    "12345678",
+		Password:    string(password3),
 		Age:         20,
 		Height:      180,
 		Weight:      66,
 		Tel:         "0655619892",
-		Birthday:         t,
+		BirthDay:    t,
 		Gender:      genM,
 		Province:    province2,
 		Package:     package3,

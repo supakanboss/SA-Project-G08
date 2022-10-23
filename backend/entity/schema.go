@@ -31,14 +31,14 @@ type PROVINCE struct {
 // สร้างตาราง member //
 type MEMBER struct {
 	gorm.Model
-	Member_NAME string
+	Member_Name	string
 	Email       string `gorm:"uniqueIndex"`
 	Password    string
 	Age         uint
 	Height      uint
 	Weight      uint
 	Tel         string `gorm:"uniqueIndex"`
-	Birthday	time.Time
+	BirthDay	time.Time
 
 	// เป็นการไปหาข้อมูลในตารางย่อยต่างๆ //
 	GenderID    *uint

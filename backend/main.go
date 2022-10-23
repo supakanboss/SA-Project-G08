@@ -38,17 +38,22 @@ func main() {
 	r := gin.Default()
 	r.Use(CORSMiddleware())
 
-	//combobox Location
+	//ให้id
+	r.GET("/member/:id", controller.GetMember)
+
+	//combobox gender
 	r.GET("/gender", controller.ListGender)
-	//combobox sport type
+	//combobox package
 	r.GET("/package", controller.ListPackage)
-	//combobox  sport equipment type
+	//combobox  province
 	r.GET("/province", controller.ListProvine)
-
+	
 	r.GET("/member", controller.ListMember)
+	r.POST("/createmember", controller.CreateMembers)
 
-	r.POST("/createmember", controller.CreateMember)
+	//login
+	r.POST("/Login", controller.Login)
 
-	r.Run()
+	r.Run()	
 
 }

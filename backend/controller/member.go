@@ -9,7 +9,7 @@ import (
 )
 
 // POST member
-func CreateMember(c *gin.Context) {
+func CreateMembers(c *gin.Context) {
 
 	var Gender entity.GENDER
 	var Package entity.PACKAGE
@@ -48,16 +48,17 @@ func CreateMember(c *gin.Context) {
 
 	//12: สร้าง entity member
 	mb := entity.MEMBER{
-		Email:       	Member.Email,        	// รายลละเอียดของ email ที่กรอกเข้ามา
-		Password:    	string(hashPassword), 	// รายลละเอียดของ password ที่กรอกเข้ามา
-		Member_NAME: 	Member.Member_NAME,   	// รายลละเอียดของ member_name ที่กรอกเข้ามา
-		Birthday:		Member.Birthday,		// รายละเอียดของ DOB ที่กรอกเข้ามา
-		Gender:      	Gender,               	// โยงความสัมพันธ์กับ Entity GENDER
-		Age:         	Member.Age,				// รายลละเอียดของ age ที่กรอกเข้ามา
-		Weight:      	Member.Weight, 			// รายลละเอียดของ weight ที่กรอกเข้ามา
-		Height:      	Member.Height, 			// รายลละเอียดของ height ที่กรอกเข้ามา
-		Package:     	Package,       			// โยงความสัมพันธ์กับ Entity PACKAGE
-		Province:    	Province,      			// โยงความสัมพันธ์กับ Entity PROVINCE
+		Email:       Member.Email,         // รายลละเอียดของ email ที่กรอกเข้ามา
+		Password:    string(hashPassword), // รายลละเอียดของ password ที่กรอกเข้ามา
+		Member_Name: Member.Member_Name,   // รายลละเอียดของ member_name ที่กรอกเข้ามา
+		BirthDay:    Member.BirthDay,      // รายละเอียดของ DOB ที่กรอกเข้ามา
+		Gender:      Gender,               // โยงความสัมพันธ์กับ Entity GENDER
+		Age:         Member.Age,           // รายลละเอียดของ age ที่กรอกเข้ามา
+		Weight:      Member.Weight,        // รายลละเอียดของ weight ที่กรอกเข้ามา
+		Height:      Member.Height,        // รายลละเอียดของ height ที่กรอกเข้ามา
+		Tel:         Member.Tel,           // รายลละเอียดของ Tel ที่กรอกเข้ามา
+		Package:     Package,              // โยงความสัมพันธ์กับ Entity PACKAGE
+		Province:    Province,             // โยงความสัมพันธ์กับ Entity PROVINCE
 	}
 
 	//13: บันทึก
@@ -105,6 +106,18 @@ func ListProvine(c *gin.Context) {
 func ListMember(c *gin.Context) {
 	var member []entity.MEMBER
 	if err := entity.DB().Raw("SELECT * FROM members").Scan(&member).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"data": member})
+}
+
+// GET /member/:id
+func GetMember(c *gin.Context) {
+	var member entity.MEMBER
+	id := c.Param("id")
+
+	if err := entity.DB().Raw("SELECT * FROM members WHERE id = ?", id).Scan(&member).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

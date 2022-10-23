@@ -4,7 +4,7 @@ import {GenderInterface} from './IGender'
 
 export interface CreateMemberInterface{
     ID? : number
-    Member_NAME : string,
+    Member_Name : string,
 	Email       : string,
 	Password    : string,
 	Age         : number,
@@ -22,4 +22,3 @@ export interface CreateMemberInterface{
 	Package     : PackageInterface,
 
 }
-   
