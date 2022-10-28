@@ -152,9 +152,6 @@ function CreateMember() {
     console.log("data", data);
 
     const requestOptions = {
-      // method: "POST",
-      // headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify(data),
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

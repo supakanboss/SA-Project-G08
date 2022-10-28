@@ -17,7 +17,7 @@ type GENDER struct {
 type PACKAGE struct {
 	gorm.Model
 	Package_Type   string
-	PackageE_Price uint
+	Package_Price uint
 	Member         []MEMBER `gorm:"foreignKey:PackageID"`
 }
 

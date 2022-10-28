@@ -1,10 +1,10 @@
 package entity
 
 import (
-	"time"
+	// "time"
 
 	"gorm.io/gorm"
-	"golang.org/x/crypto/bcrypt"
+	// "golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 )
 
@@ -18,7 +18,7 @@ func DB() *gorm.DB {
 
 func SetupDatabase() {
 	///////////ทดลองให้เวลาเกิดเป็นเวลาปัจุบัน///////////
-	t := time.Now()
+	// t := time.Now()
 
 	database, err := gorm.Open(sqlite.Open("sa-65.db"), &gorm.Config{})
 
@@ -31,47 +31,47 @@ func SetupDatabase() {
 	// Migrate the schema
 	database.AutoMigrate(
 		&MEMBER{},
-		&GENDER{},
-		&PACKAGE{},
-		&PROVINCE{},
+		&GENDER{},   //เพิ่มค่าเข้าไป
+		&PACKAGE{},  //เพิ่มค่าเข้าไป
+		&PROVINCE{}, //เพิ่มค่าเข้าไป
 	)
 
 	db = database
 
-	// GENDER --> เซ็ตข้อมูลเพศ //
-	genM := GENDER{
+	///////////////ข้อมูลใน entity GENDER///////////
+	GenderMale := GENDER{
 		Gender_Type: "ชาย",
 	}
-	db.Model(&GENDER{}).Create(&genM)
+	db.Model(&GENDER{}).Create(&GenderMale)
 
-	genF := GENDER{
+	GenderFemale := GENDER{
 		Gender_Type: "หญิง",
 	}
-	db.Model(&GENDER{}).Create(&genF)
+	db.Model(&GENDER{}).Create(&GenderFemale)
 
-	genO := GENDER{
+	GenderOther := GENDER{
 		Gender_Type: "อื่นๆ",
 	}
-	db.Model(&GENDER{}).Create(&genO)
+	db.Model(&GENDER{}).Create(&GenderOther)
 
-	//PACKAGE --> เซ็ตข้อมูล package //
-	package1 := PACKAGE{
-		Package_Type:   "รายปี",
-		PackageE_Price: 25000,
+	///////////////ข้อมูลใน entity PACKAGE//////////
+	Package1 := PACKAGE{
+		Package_Type:  "Year (25000 THB)",
+		Package_Price: 25000,
 	}
-	db.Model(&PACKAGE{}).Create(&package1)
+	db.Model(&PACKAGE{}).Create(&Package1)
 
-	package2 := PACKAGE{
-		Package_Type:   "รายเดือน",
-		PackageE_Price: 2000,
+	Package2 := PACKAGE{
+		Package_Type:  "Month (2000 THB)",
+		Package_Price: 2000,
 	}
-	db.Model(&PACKAGE{}).Create(&package2)
+	db.Model(&PACKAGE{}).Create(&Package2)
 
-	package3 := PACKAGE{
-		Package_Type:   "รายครั้ง",
-		PackageE_Price: 80,
+	Package3 := PACKAGE{
+		Package_Type:  "daily (80 THB)",
+		Package_Price: 80,
 	}
-	db.Model(&PACKAGE{}).Create(&package3)
+	db.Model(&PACKAGE{}).Create(&Package3)
 
 	//PROVINCE --> เซ็ตข้อมูลจังหวัด //
 	province1 := PROVINCE{
@@ -459,50 +459,4 @@ func SetupDatabase() {
 	}
 	db.Model(&PROVINCE{}).Create(&province77)
 
-	///////////////ข้อมูลใน entity MEMBER///////////
-	password1, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
-	password2, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
-	password3, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
-	//คนที่1
-	db.Model(&MEMBER{}).Create(&MEMBER{
-		Member_Name: "สุภานัน เรืองสุข",
-		Email:       "supanan@gmail.com",
-		Password:    string(password1),
-		Age:         20,
-		Height:      190,
-		Weight:      45,
-		Tel:         "0885870149",
-		BirthDay:    t,
-		Gender:      genM,
-		Province:    province69,
-		Package:     package2,
-	})
-	//คนที่2
-	db.Model(&MEMBER{}).Create(&MEMBER{
-		Member_Name: "วนัสนันท์ จันทร์มล",
-		Email:       "B6306304@g.sut.ac.th",
-		Password:    string(password2),
-		Age:         21,
-		Height:      170,
-		Weight:      48,
-		Tel:         "0803299545",
-		BirthDay:    t,
-		Gender:      genF,
-		Province:    province14,
-		Package:     package1,
-	})
-	//คนที่3
-	db.Model(&MEMBER{}).Create(&MEMBER{
-		Member_Name: "ศุภกานต์ แสงจันทร์",
-		Email:       "B6311391@g.sut.ac.th",
-		Password:    string(password3),
-		Age:         20,
-		Height:      180,
-		Weight:      66,
-		Tel:         "0655619892",
-		BirthDay:    t,
-		Gender:      genM,
-		Province:    province2,
-		Package:     package3,
-	})
 }

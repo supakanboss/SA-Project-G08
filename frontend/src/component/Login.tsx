@@ -66,13 +66,15 @@ function Login() {
     let res = await fetch("http://localhost:8080/Login", requestOptions)
       .then((response) => response.json())
       .then((res) => {
+        console.log("ok one",res.data);
         if (res.data) {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("uid", res.data.id);
-          console.log(res.data);
+          console.log("ok two",res.data);
           return res.data;
         } else {
           return false;
+          console.log("ok three",res.data);
         }
       });
 
