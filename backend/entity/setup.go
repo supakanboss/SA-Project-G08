@@ -49,8 +49,8 @@ func SetupDatabase() {
 
 	// STAFF
 	password1, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
-	password2, err := bcrypt.GenerateFromPassword([]byte("00112233"), 14)
-	password3, err := bcrypt.GenerateFromPassword([]byte("888888888"), 14)
+	password2, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
+	password3, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
 
 	staff1 := STAFF{
 		Staff_name:     "นฤมน เกษรบัว",
