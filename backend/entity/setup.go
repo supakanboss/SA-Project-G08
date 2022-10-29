@@ -610,6 +610,11 @@ func SetupDatabase() {
 	}
 	db.Model(&SPORT_TYPE{}).Create(&Sport_type8)
 
+	Sport_type9 := SPORT_TYPE{
+		Sport_Type_Name: "แบดมินตัน",
+	}
+	db.Model(&SPORT_TYPE{}).Create(&Sport_type9)
+
 	password1, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
 	password2, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
 	password3, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)

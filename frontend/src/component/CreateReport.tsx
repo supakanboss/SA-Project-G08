@@ -37,12 +37,14 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 function CreateReport() {
     /////////////////// combobox /////////////////////////////////
+    
     const [location, setLocation] = useState<LocationInterface[]>([]);
     const [sporteuqipmenttype, setSportEuqipmentType] = useState<SportEuqipmentTypeInterface[]>([]);
     const [sporttype, setSportType] = useState<SportTypeInterface[]>([]);
+    
     const [report, setReport] = useState<Partial<ReportInterface>>({});
-    const [success, setSuccess] = useState(false);
 
+    const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
 
     const apiUrl = "http://localhost:8080";
