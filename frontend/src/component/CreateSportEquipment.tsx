@@ -289,7 +289,7 @@ function CreateSportEquipment() {
                   fullWidth
                   id="Sport_Equipment_Amount" // แก้ตรงนี้ให้ตรงกับ json (แก้แล้ว)
                   type="Number"
-                  InputProps={{ inputProps: { min: 0, max: 20000 } }}
+                  InputProps={{ inputProps: { min: 1, max: 20000 } }}
                   label="จำนวนอุปกรณ์"
                   variant="outlined"
                   value={sportequipment.Sport_Equipment_Amount}

@@ -126,15 +126,14 @@ function CreateBorrow_Sport_Equipment() {
         });
     };
 
-    const handleInputChange = (
-        event: React.ChangeEvent<{ id?: string; value: any }>
-    ) => {
-        const id = event.target.id as keyof typeof CreateBorrow_Sport_Equipment;
-        const { value } = event.target;
-        console.log(id, value);
-        // แก้ตรงนี้ จาก staff เป็น sportequipment
-        setCreateBorrow_Sport_Equipment({ ...CreateBorrow_Sport_Equipment, [id]: value });
-    };
+    // const handleInputChange = (
+    //     event: React.ChangeEvent<{ id?: string; value: any }>
+    // ) => {
+    //     const id = event.target.id as keyof typeof CreateBorrow_Sport_Equipment;
+    //     const { value } = event.target;
+    //     console.log(id, value);
+    //     setCreateBorrow_Sport_Equipment({ ...CreateBorrow_Sport_Equipment, [id]: value });
+    // };
 
     const fetchMemberByID = async () => {
         let res = await GetMemberByID();
