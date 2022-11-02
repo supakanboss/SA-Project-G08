@@ -80,14 +80,14 @@ function CreateBorrow_Sport_Equipment() {
             });
     }
 
-    const fetchCreateBorrowSportEquipments = async () => {
-        fetch(`${apiUrl}/borrow-sport-eqiupments`, requestOpionsGet)
-            .then((response) => response.json())
-            .then((result) => {
-                console.log(result.data);
-                setCreateBorrow_Sport_Equipments(result.Data);
-            });
-    };
+    // const fetchCreateBorrowSportEquipments = async () => {
+    //     fetch(`${apiUrl}/borrow-sport-eqiupments`, requestOpionsGet)
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             console.log(result.data);
+    //             setCreateBorrow_Sport_Equipments(result.Data);
+    //         });
+    // };
 
     const feachSport_Equipment = async () => {
         fetch(`${apiUrl}/sport_equipment_data`, requestOpionsGet)
@@ -148,7 +148,7 @@ function CreateBorrow_Sport_Equipment() {
     useEffect(() => {
         feachSport_Equipment_Type();
         feachSport_Equipment();
-        fetchCreateBorrowSportEquipments();
+        // fetchCreateBorrowSportEquipments();
         getBorrowSportEquipment();
         fetchMemberByID();
     }, []);
