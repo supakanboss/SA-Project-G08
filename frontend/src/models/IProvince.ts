@@ -1,4 +1,4 @@
-export interface ProvinceInterface{
+export interface ProvinceInterface {
     ID: number,
-    Province_Type : string,
+    Province_Type: string,
 }

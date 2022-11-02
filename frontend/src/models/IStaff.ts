@@ -1,4 +1,4 @@
-export interface StaffInterface{
+export interface StaffInterface {
     ID: number,
     Staff_name: string,
     Staff_email: string,

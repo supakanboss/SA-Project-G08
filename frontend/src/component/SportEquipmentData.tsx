@@ -8,23 +8,24 @@ import { SportEquipmentInterface } from "../models/ISport_Equipment";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link as RouterLink } from "react-router-dom";
 import StaffBar from "../component/StaffBar";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Home from "../component/Home";
 
 const Theme = createTheme({
   palette: {
     primary: {
-      main: '#323232',
+      main: "#323232",
     },
     secondary: {
-      main: '#FF8B8B',
+      main: "#FF8B8B",
     },
   },
 });
 
-
 function SportEquipmentData() {
-  const [sportquipments, setSportEquipments] = React.useState<SportEquipmentInterface[]>([]);
+  const [sportquipments, setSportEquipments] = React.useState<
+    SportEquipmentInterface[]
+  >([]);
 
   const apiUrl = "http://localhost:8080";
   const requestOptionsGet = {
@@ -48,8 +49,6 @@ function SportEquipmentData() {
           setSportEquipments(res.data);
         }
       });
-
-
   };
 
   /////////////////// จัดคอลัมน์รายการบันทึก //////////////////////
@@ -114,7 +113,6 @@ function SportEquipmentData() {
   }, []);
 
   if (!token) {
-
     return <Home />;
   }
 
@@ -125,10 +123,13 @@ function SportEquipmentData() {
         <div />
 
         <Container maxWidth="lg">
-          <Box display="flex" sx={{ marginRight: 0, margin: 2, marginX: 126.3 }}>
+          <Box
+            display="flex"
+            sx={{ marginRight: 0, margin: 2, marginX: 126.3 }}
+          >
             <Box>
               <Button
-                sx={{ float: 'right' }}
+                sx={{ float: "right" }}
                 component={RouterLink}
                 to="/create_sport_equipment"
                 variant="contained"

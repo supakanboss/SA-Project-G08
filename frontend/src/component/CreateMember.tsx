@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import TextField from '@mui/material/TextField';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { FormControl } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { FormControl } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { PackageInterface } from '../models/IPackage';
-import { ProvinceInterface } from '../models/IProvince';
-import { GenderInterface } from '../models/IGender';
-import { CreateMemberInterface } from '../models/ICreateMember';
+import { PackageInterface } from "../models/IPackage";
+import { ProvinceInterface } from "../models/IProvince";
+import { GenderInterface } from "../models/IGender";
+import { CreateMemberInterface } from "../models/ICreateMember";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
-import Homebar from './Homebar';
+import Homebar from "./Homebar";
 import { Link as RouterLink } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const Theme = createTheme({
   palette: {
     primary: {
-      main: '#323232',
+      main: "#323232",
     },
     secondary: {
-      main: '#FF8B8B',
+      main: "#FF8B8B",
     },
   },
 });
@@ -39,13 +39,12 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-
 function CreateMember() {
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   }));
 
@@ -54,7 +53,9 @@ function CreateMember() {
   const [gender, setGender] = useState<GenderInterface[]>([]);
   const [province, setProvince] = useState<ProvinceInterface[]>([]);
   const [packages, setPackage] = useState<PackageInterface[]>([]);
-  const [CreateMember, setCreateMember] = useState<Partial<CreateMemberInterface>>({});
+  const [CreateMember, setCreateMember] = useState<
+    Partial<CreateMemberInterface>
+  >({});
 
   const apiUrl = "http://localhost:8080";
 
@@ -102,7 +103,7 @@ function CreateMember() {
   };
 
   const handleChange = (event: SelectChangeEvent) => {
-    const name = event.target.name as keyof typeof CreateMember
+    const name = event.target.name as keyof typeof CreateMember;
     setCreateMember({
       ...CreateMember,
       [name]: event.target.value,
@@ -127,7 +128,7 @@ function CreateMember() {
     feachProvince();
   }, []);
 
-  console.log(CreateMember)
+  console.log(CreateMember);
 
   const convertType = (data: string | number | undefined) => {
     let val = typeof data === "string" ? parseInt(data) : data;
@@ -147,7 +148,7 @@ function CreateMember() {
       GenderID: convertType(CreateMember.GenderID),
       ProvinceID: convertType(CreateMember.ProvinceID),
       PackageID: convertType(CreateMember.PackageID),
-    }
+    };
 
     console.log("data", data);
 
@@ -222,8 +223,11 @@ function CreateMember() {
             </Box>
             <hr />
 
-            <Grid container spacing={2} sx={{ marginX: 5, marginY: 1, padding: 2, }}>
-
+            <Grid
+              container
+              spacing={2}
+              sx={{ marginX: 5, marginY: 1, padding: 2 }}
+            >
               {/* e-mail */}
               <Grid item xs={6}>
                 <p>E-mail</p>
@@ -306,7 +310,7 @@ function CreateMember() {
                       renderInput={(params) => <TextField {...params} />}
                       value={birthDay}
                       label="วันเกิด"
-                      onChange={setBirthday}                    
+                      onChange={setBirthday}
                     />
                   </LocalizationProvider>
                 </FormControl>
@@ -325,13 +329,13 @@ function CreateMember() {
                   onChange={handleChange}
                   native
                   value={CreateMember.GenderID + ""}
-                  inputProps={{ name: "GenderID" }}>
-                  <option aria-label="None" value=""
-                  >
+                  inputProps={{ name: "GenderID" }}
+                >
+                  <option aria-label="None" value="">
                     กรุณาเลือกเพศ
                   </option>
                   {gender.map((item) => (
-                    <option key={item.ID} value={item.ID} >
+                    <option key={item.ID} value={item.ID}>
                       {item.Gender_Type}
                     </option>
                   ))}
@@ -393,7 +397,7 @@ function CreateMember() {
                     กรุณาเลือกจังหวัด
                   </option>
                   {province.map((item) => (
-                    <option key={item.ID} value={item.ID} >
+                    <option key={item.ID} value={item.ID}>
                       {item.Province_Type}
                     </option>
                   ))}
@@ -438,7 +442,7 @@ function CreateMember() {
                     กรุณาเลือกPackage
                   </option>
                   {packages.map((item) => (
-                    <option key={item.ID} value={item.ID} >
+                    <option key={item.ID} value={item.ID}>
                       {item.Package_Type}
                     </option>
                   ))}
@@ -449,12 +453,13 @@ function CreateMember() {
                 {/*<Item>xs=8</Item>*/}
               </Grid>
 
-              <Grid item xs={12} sx={{ marginY: 1, }}>
+              <Grid item xs={12} sx={{ marginY: 1 }}>
                 <Button
                   variant="contained"
                   color="secondary"
                   component={RouterLink}
-                  to="/">
+                  to="/"
+                >
                   BACK
                 </Button>
 
@@ -462,13 +467,12 @@ function CreateMember() {
                   onClick={submit}
                   variant="contained"
                   color="primary"
-                  sx={{ marginX: 23, }}>
+                  sx={{ marginX: 23 }}
+                >
                   SUBMIT
                 </Button>
               </Grid>
-
             </Grid>
-
           </Paper>
         </Container>
       </ThemeProvider>

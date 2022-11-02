@@ -1,4 +1,4 @@
-export interface Payment_TypeInterface{
+export interface Payment_TypeInterface {
     ID: number,
-    Payment_Type_Name : string,
+    Payment_Type_Name: string,
 }

@@ -10,17 +10,17 @@ import Typography from "@mui/material/Typography";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { LoginInterface } from "../models/ILogin"
+import { LoginInterface } from "../models/ILogin";
 import Homebar from "./Homebar";
 import { FcSportsMode } from "react-icons/fc";
 
 const Theme = createTheme({
   palette: {
     primary: {
-      main: '#323232',
+      main: "#323232",
     },
     secondary: {
-      main: '#FF8B8B',
+      main: "#FF8B8B",
     },
   },
 });
@@ -89,7 +89,6 @@ function Login() {
     } else {
       setError(true);
     }
-
   };
 
   return (
@@ -124,7 +123,8 @@ function Login() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)",
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

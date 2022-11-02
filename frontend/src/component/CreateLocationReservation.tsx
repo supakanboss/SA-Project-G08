@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { LocationInterface } from "../models/ILocation";
 import { SportTypeInterface } from "../models/ISport_Type";
@@ -18,18 +18,18 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { GetMemberByID } from "../services/HttpClientService";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Home from './Home';
-import MemberBar from './MemberBar';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Home from "./Home";
+import MemberBar from "./MemberBar";
 import { Link as RouterLink } from "react-router-dom";
 
 const Theme = createTheme({
   palette: {
     primary: {
-      main: '#323232',
+      main: "#323232",
     },
     secondary: {
-      main: '#FF8B8B',
+      main: "#FF8B8B",
     },
   },
 });
@@ -42,13 +42,16 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 function LocationReservation() {
-
   const [location, setLocation] = useState<LocationInterface[]>([]);
   const [sporttype, setSportType] = useState<SportTypeInterface[]>([]);
 
-  const [locationreservations, setLocationReservations] = useState<LocationReservationInterface[]>([]);
+  const [locationreservations, setLocationReservations] = useState<
+    LocationReservationInterface[]
+  >([]);
 
-  const [locationreservation, setLocationReservation] = useState<Partial<LocationReservationInterface>>({});
+  const [locationreservation, setLocationReservation] = useState<
+    Partial<LocationReservationInterface>
+  >({});
 
   const [time_in, setTime_in] = useState<Date | null>(new Date());
   const [time_out, setTime_out] = useState<Date | null>(new Date());
@@ -125,7 +128,7 @@ function LocationReservation() {
       setMember(res);
     }
   };
-  console.log(typeof locationreservation.MemberID)
+  console.log(typeof locationreservation.MemberID);
 
   /////////////////////////////////////////////////////////////////////////
 
@@ -137,29 +140,48 @@ function LocationReservation() {
     fetchMemberByID();
   }, []);
 
-  console.log(locationreservation)
+  console.log(locationreservation);
   ////////////////////////////
 
   const columns: GridColDef[] = [
-
     { field: "ID", headerName: "ID", width: 100 },
-    { field: "Location", headerName: "Location", width: 150 , valueFormatter: (params) => params.value.Location_Name,},
+    {
+      field: "Location",
+      headerName: "Location",
+      width: 150,
+      valueFormatter: (params) => params.value.Location_Name,
+    },
     { field: "Time_In", headerName: "Time In", width: 300 },
     { field: "Time_Out", headerName: "Time Out", width: 300 },
-    { field: "Member", headerName: "Member", width: 300 , valueFormatter: (params) => params.value.Member_Name,},
-    { field: "Sport_Type", headerName: "Sport Type", width: 300 , valueFormatter: (params) => params.value.Sport_Type_Name,},
-
+    {
+      field: "Member",
+      headerName: "Member",
+      width: 300,
+      valueFormatter: (params) => params.value.Member_Name,
+    },
+    {
+      field: "Sport_Type",
+      headerName: "Sport Type",
+      width: 300,
+      valueFormatter: (params) => params.value.Sport_Type_Name,
+    },
   ];
 
   //ตัวรับข้อมูลเข้าตาราง
   function submit() {
     let data = {
       MemberID: locationreservation.MemberID,
-      LocationID: typeof locationreservation.LocationID === "string" ? parseInt(locationreservation.LocationID) : 0,
-      Sport_TypeID: typeof locationreservation.Sport_TypeID === "string" ? parseInt(locationreservation.Sport_TypeID) : 0,
+      LocationID:
+        typeof locationreservation.LocationID === "string"
+          ? parseInt(locationreservation.LocationID)
+          : 0,
+      Sport_TypeID:
+        typeof locationreservation.Sport_TypeID === "string"
+          ? parseInt(locationreservation.Sport_TypeID)
+          : 0,
       Time_In: time_in,
       Time_Out: time_out,
-    }
+    };
 
     const requestOptions = {
       method: "POST",
@@ -180,7 +202,7 @@ function LocationReservation() {
           setError(true);
         }
       });
-    console.log(locationreservation.MemberID)
+    console.log(locationreservation.MemberID);
   }
 
   const [token, setToken] = useState<String>("");
@@ -192,7 +214,6 @@ function LocationReservation() {
   }, []);
 
   if (!token) {
-
     return <Home />;
   }
 
@@ -248,21 +269,19 @@ function LocationReservation() {
                   onChange={handleChange}
                   native
                   value={locationreservation.LocationID + ""}
-                  inputProps={{ name: "LocationID", }}
+                  inputProps={{ name: "LocationID" }}
                 >
                   <option aria-label="None" value="">
                     กรุณาเลือกสถานที่
                   </option>
                   {location.map((item) => (
-                    <option key={item.ID} value={item.ID} >
+                    <option key={item.ID} value={item.ID}>
                       {item.Location_Name}
                     </option>
                   ))}
                 </Select>
               </Grid>
-              <Grid xs={6} sx={{ padding: 1 }}>
-
-              </Grid>
+              <Grid xs={6} sx={{ padding: 1 }}></Grid>
               <Grid xs={6}>
                 <p>ประเภทกีฬาที่ให้บริการ</p>
                 <Select
@@ -271,21 +290,20 @@ function LocationReservation() {
                   onChange={handleChange}
                   native
                   value={locationreservation.Sport_TypeID + ""}
-                  inputProps={{ name: "Sport_TypeID", }}>
+                  inputProps={{ name: "Sport_TypeID" }}
+                >
                   <option aria-label="None" value="">
                     กรุณาเลือกประเภทกีฬา
                   </option>
                   {sporttype.map((item) => (
-                    <option key={item.ID} value={item.ID} >
+                    <option key={item.ID} value={item.ID}>
                       {item.Sport_Type_Name}
                     </option>
                   ))}
                 </Select>
               </Grid>
-              <Grid xs={6}>
-
-              </Grid>
-              <Grid xs={3} >
+              <Grid xs={6}></Grid>
+              <Grid xs={3}>
                 <FormControl fullWidth variant="outlined">
                   <p>เวลาเข้า</p>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -309,9 +327,7 @@ function LocationReservation() {
                   </LocalizationProvider>
                 </FormControl>
               </Grid>
-              <Grid xs={6}>
-
-              </Grid>
+              <Grid xs={6}></Grid>
               <Grid xs={6} sx={{ marginTop: 3 }}>
                 <Button
                   variant="contained"
@@ -325,26 +341,29 @@ function LocationReservation() {
                   onClick={submit}
                   variant="contained"
                   color="primary"
-                  sx={{ float: 'right' }}>
+                  sx={{ float: "right" }}
+                >
                   SUBMIT
                 </Button>
               </Grid>
             </Grid>
           </Paper>
         </Container>
-        <div style={{ height: 400, width: "97%", marginTop: '20px', marginLeft: '23px' }}>
+        <div
+          style={{
+            height: 400,
+            width: "97%",
+            marginTop: "20px",
+            marginLeft: "23px",
+          }}
+        >
           <h3>รายการจองสถานที่</h3>
           <DataGrid
             rows={locationreservations}
-
             getRowId={(row) => row.ID}
-
             columns={columns}
-
             pageSize={5}
-
             rowsPerPageOptions={[5]}
-
           />
         </div>
       </ThemeProvider>

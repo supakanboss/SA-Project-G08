@@ -17,10 +17,10 @@ import { GrUserAdmin } from "react-icons/gr";
 const Theme = createTheme({
   palette: {
     primary: {
-      main: '#323232',
+      main: "#323232",
     },
     secondary: {
-      main: '#FF8B8B',
+      main: "#FF8B8B",
     },
   },
 });
@@ -33,7 +33,9 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 function StaffLogin() {
-  const [stafflogin, setStaffLogin] = useState<Partial<StaffLoginInterface>>({});
+  const [stafflogin, setStaffLogin] = useState<Partial<StaffLoginInterface>>(
+    {}
+  );
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -45,7 +47,6 @@ function StaffLogin() {
     setStaffLogin({ ...stafflogin, [id]: value });
     console.log(stafflogin);
   };
-  
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -117,7 +118,7 @@ function StaffLogin() {
             อีเมลหรือรหัสผ่านไม่ถูกต้อง
           </Alert>
         </Snackbar>
-        
+
         <CssBaseline />
         <Grid
           item
@@ -125,7 +126,8 @@ function StaffLogin() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://images.unsplash.com/photo-1629904869392-ae2a682d4d01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80)",
+            backgroundImage:
+              "url(https://images.unsplash.com/photo-1629904869392-ae2a682d4d01?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -147,7 +149,7 @@ function StaffLogin() {
             }}
           >
             <Avatar sx={{ width: 80, height: 80 }}>
-              <GrUserAdmin size={50}/>
+              <GrUserAdmin size={50} />
             </Avatar>
             <Typography component="h1" variant="h5">
               Login

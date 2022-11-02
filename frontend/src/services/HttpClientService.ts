@@ -18,7 +18,7 @@ const GetMemberByID = async () => {
       } else {
         return false;
       }
-    }); 
+    });
 
   return result;
 };
@@ -43,7 +43,7 @@ const GetStaffByID = async () => {
       } else {
         return false;
       }
-    }); 
+    });
 
   return result;
 };
@@ -52,23 +52,23 @@ export { GetStaffByID };
 
 async function ListLocationReservation() {
   const requestOptions = {
-      method: "GET",
-      headers: {
+    method: "GET",
+    headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
-      },
+    },
   };
 
   let res = await fetch(`${apiUrl}/locationReservation/`, requestOptions)
-      .then((response) => response.json())
-      .then((res) => {
+    .then((response) => response.json())
+    .then((res) => {
       if (res.data) {
-          console.log("print",res.data);
-          return res.data;
+        console.log("print", res.data);
+        return res.data;
       } else {
-          return false;
+        return false;
       }
-      });
+    });
 
   return res;
 }

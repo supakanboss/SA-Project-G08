@@ -15,16 +15,16 @@ import { StaffInterface } from "../models/IStaff";
 import Snackbar from "@mui/material/Snackbar";
 import { GetStaffByID } from "../services/HttpClientService";
 import StaffBar from "../component/StaffBar";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Home from "../component/Home";
 
 const Theme = createTheme({
   palette: {
     primary: {
-      main: '#323232',
+      main: "#323232",
     },
     secondary: {
-      main: '#FF8B8B',
+      main: "#FF8B8B",
     },
   },
 });
@@ -38,10 +38,14 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 
 function CreateSportEquipment() {
   /////////////////////////////////// COMBOBOX /////////////////////////////////////
-  const [sportequipmenttype, setSportEquipmentype] = useState<SportEuqipmentTypeInterface[]>([]);
+  const [sportequipmenttype, setSportEquipmentype] = useState<
+    SportEuqipmentTypeInterface[]
+  >([]);
   const [sporttype, setSportType] = useState<SportTypeInterface[]>([]);
   const [staff, setStaff] = useState<StaffInterface>();
-  const [sportequipment, setSportEquipment] = useState<Partial<SportEquipmentInterface>>({});
+  const [sportequipment, setSportEquipment] = useState<
+    Partial<SportEquipmentInterface>
+  >({});
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -129,9 +133,13 @@ function CreateSportEquipment() {
     let data = {
       StaffID: convertType(sportequipment.StaffID),
       Sport_TypeID: convertType(sportequipment.Sport_TypeID),
-      Sport_Equipment_TypeID: convertType(sportequipment.Sport_Equipment_TypeID),
+      Sport_Equipment_TypeID: convertType(
+        sportequipment.Sport_Equipment_TypeID
+      ),
       Sport_Equipment_Name: sportequipment.Sport_Equipment_Name,
-      Sport_Equipment_Amount: convertType(sportequipment.Sport_Equipment_Amount),
+      Sport_Equipment_Amount: convertType(
+        sportequipment.Sport_Equipment_Amount
+      ),
       // StaffID: 1,
       // Sport_TypeID: 1,
       // Sport_Equipment_TypeID: 1,
@@ -176,149 +184,148 @@ function CreateSportEquipment() {
   }, []);
 
   if (!token) {
-
     return <Home />;
   }
 
   return (
     <div>
       <ThemeProvider theme={Theme}>
-       <StaffBar/>
-    <div />
+        <StaffBar />
+        <div />
 
-      <Container maxWidth="lg">
-        <Box
-          sx={{
-            mt: 2,
-          }}
-        >
-          <Snackbar
-            open={success}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        <Container maxWidth="lg">
+          <Box
+            sx={{
+              mt: 2,
+            }}
           >
-            <Alert onClose={handleClose} severity="success">
-              บันทึกข้อมูลสำเร็จ
-            </Alert>
-          </Snackbar>
-
-          <Snackbar
-            open={error}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          >
-            <Alert onClose={handleClose} severity="error">
-              บันทึกข้อมูลไม่สำเร็จ
-            </Alert>
-          </Snackbar>
-        </Box>
-        <Paper>
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                "& > :not(style)": {
-                  m: 1,
-                  width: 1,
-                  height: 50,
-                },
-              }}
+            <Snackbar
+              open={success}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <h2>ระบบบันทึกข้อมูลอุปกรณ์กีฬา</h2>
-            </Box>
-            <hr />
-            <Grid container spacing={2} sx={{ padding: 2 }}>
-              <Grid item xs={12}>
-                <p>ประเภทอุปกรณ์กีฬา</p>
-                <Select
-                  fullWidth
-                  id="SportEquipmentType"
-                  onChange={handleChange}
-                  native
-                  value={sportequipment.Sport_Equipment_TypeID + ""}
-                  inputProps={{ name: "Sport_Equipment_TypeID" }}
-                >
-                  <option aria-label="None" value="">
-                    กรุณาเลือกประเภทอุปกรณ์กีฬา
-                  </option>
-                  {sportequipmenttype.map((item) => (
-                    <option key={item.ID} value={item.ID}>
-                      {item.SPORT_EQUIPMENT_TYPE_Name}
-                    </option>
-                  ))}
-                </Select>
-              </Grid>
-              <Grid item xs={12}>
-                <p>ประเภทกีฬา</p>
-                <Select
-                  fullWidth
-                  id="SportType"
-                  onChange={handleChange}
-                  native
-                  value={sportequipment.Sport_TypeID + ""}
-                  inputProps={{ name: "Sport_TypeID" }}
-                >
-                  <option aria-label="None" value="">
-                    กรุณาเลือกประเภทกีฬา
-                  </option>
-                  {sporttype.map((item) => (
-                    <option key={item.ID} value={item.ID}>
-                      {item.Sport_Type_Name}
-                    </option>
-                  ))}
-                </Select>
-              </Grid>
+              <Alert onClose={handleClose} severity="success">
+                บันทึกข้อมูลสำเร็จ
+              </Alert>
+            </Snackbar>
 
-              <Grid item xs={12}>
-                <p>ชื่ออุปกรณ์กีฬา</p>
-                <TextField
-                  fullWidth
-                  id="Sport_Equipment_Name" // แก้ตรงนี้ให้ตรงกับ json (แก้แล้ว)
-                  label="ชื่ออุปกรณ์กีฬา"
-                  variant="outlined"
-                  value={sportequipment.Sport_Equipment_Name}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <p>จำนวนอุปกรณ์</p>
-                <TextField
-                  fullWidth
-                  id="Sport_Equipment_Amount" // แก้ตรงนี้ให้ตรงกับ json (แก้แล้ว)
-                  type="Number"
-                  InputProps={{ inputProps: { min: 1, max: 20000 } }}
-                  label="จำนวนอุปกรณ์"
-                  variant="outlined"
-                  value={sportequipment.Sport_Equipment_Amount}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  component={RouterLink}
-                  to="/sport_equipment_data"
-                  variant="contained"
-                  color="secondary"
-                >
-                  BACK
-                </Button>
+            <Snackbar
+              open={error}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            >
+              <Alert onClose={handleClose} severity="error">
+                บันทึกข้อมูลไม่สำเร็จ
+              </Alert>
+            </Snackbar>
+          </Box>
+          <Paper>
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  "& > :not(style)": {
+                    m: 1,
+                    width: 1,
+                    height: 50,
+                  },
+                }}
+              >
+                <h2>ระบบบันทึกข้อมูลอุปกรณ์กีฬา</h2>
+              </Box>
+              <hr />
+              <Grid container spacing={2} sx={{ padding: 2 }}>
+                <Grid item xs={12}>
+                  <p>ประเภทอุปกรณ์กีฬา</p>
+                  <Select
+                    fullWidth
+                    id="SportEquipmentType"
+                    onChange={handleChange}
+                    native
+                    value={sportequipment.Sport_Equipment_TypeID + ""}
+                    inputProps={{ name: "Sport_Equipment_TypeID" }}
+                  >
+                    <option aria-label="None" value="">
+                      กรุณาเลือกประเภทอุปกรณ์กีฬา
+                    </option>
+                    {sportequipmenttype.map((item) => (
+                      <option key={item.ID} value={item.ID}>
+                        {item.SPORT_EQUIPMENT_TYPE_Name}
+                      </option>
+                    ))}
+                  </Select>
+                </Grid>
+                <Grid item xs={12}>
+                  <p>ประเภทกีฬา</p>
+                  <Select
+                    fullWidth
+                    id="SportType"
+                    onChange={handleChange}
+                    native
+                    value={sportequipment.Sport_TypeID + ""}
+                    inputProps={{ name: "Sport_TypeID" }}
+                  >
+                    <option aria-label="None" value="">
+                      กรุณาเลือกประเภทกีฬา
+                    </option>
+                    {sporttype.map((item) => (
+                      <option key={item.ID} value={item.ID}>
+                        {item.Sport_Type_Name}
+                      </option>
+                    ))}
+                  </Select>
+                </Grid>
 
-                <Button
-                  onClick={submit}
-                  variant="contained"
-                  color="primary"
-                  sx={{ float: "right" }}
-                >
-                  SUBMIT
-                </Button>
+                <Grid item xs={12}>
+                  <p>ชื่ออุปกรณ์กีฬา</p>
+                  <TextField
+                    fullWidth
+                    id="Sport_Equipment_Name" // แก้ตรงนี้ให้ตรงกับ json (แก้แล้ว)
+                    label="ชื่ออุปกรณ์กีฬา"
+                    variant="outlined"
+                    value={sportequipment.Sport_Equipment_Name}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <p>จำนวนอุปกรณ์</p>
+                  <TextField
+                    fullWidth
+                    id="Sport_Equipment_Amount" // แก้ตรงนี้ให้ตรงกับ json (แก้แล้ว)
+                    type="Number"
+                    InputProps={{ inputProps: { min: 1, max: 20000 } }}
+                    label="จำนวนอุปกรณ์"
+                    variant="outlined"
+                    value={sportequipment.Sport_Equipment_Amount}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    component={RouterLink}
+                    to="/sport_equipment_data"
+                    variant="contained"
+                    color="secondary"
+                  >
+                    BACK
+                  </Button>
+
+                  <Button
+                    onClick={submit}
+                    variant="contained"
+                    color="primary"
+                    sx={{ float: "right" }}
+                  >
+                    SUBMIT
+                  </Button>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </Container>
+          </Paper>
+        </Container>
       </ThemeProvider>
     </div>
   );
